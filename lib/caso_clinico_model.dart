@@ -1,0 +1,25 @@
+// lib/caso_clinico_model.dart
+
+class CasoClinico {
+  final String id;
+  final String title;
+  final String queixaPrincipal;
+  final String detalhesPaciente;
+  final Map<String, String> exames;
+  final List<String> objetivos;
+  final String referencia;
+  final String dificuldade;
+  final String categoria;
+
+  CasoClinico({
+    required this.id,
+    required this.title,
+    required this.queixaPrincipal,
+    required this.detalhesPaciente,
+    required this.exames,
+    required this.objetivos,
+    required this.referencia,
+    required this.dificuldade,
+    required this.categoria,
+  });
+}
