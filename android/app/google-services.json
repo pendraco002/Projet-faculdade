@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "385918439846",
+    "project_id": "duelo-metabolico-app1",
+    "storage_bucket": "duelo-metabolico-app1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385918439846:android:9f3060e35aba5658a87f67",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4j4DFD7e5qJeRIpzhyRigX3l1E2n6je4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
