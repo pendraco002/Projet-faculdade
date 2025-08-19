@@ -1,9 +1,20 @@
 // lib/main.dart
-
 import 'package:flutter/material.dart';
-import 'package:myapp/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:myapp/core/providers/auth_provider.dart';
+import 'package:myapp/core/providers/duel_provider.dart';
+import 'package:myapp/core/providers/theme_provider.dart';
+import 'package:myapp/core/router/app_router.dart';
+import 'package:myapp/presentation/theme/app_theme.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
   runApp(const DueloMetabolicoApp());
 }
 
@@ -12,43 +23,21 @@ class DueloMetabolicoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Duelo Metabólico',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF0A101E),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFE94560),
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            textStyle: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        cardTheme: CardThemeData(
-          color: const Color(0xCC1A2E40),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          elevation: 4,
-          shadowColor: Colors.black.withAlpha(128),
-        ),
-        inputDecorationTheme: const InputDecorationTheme(
-          filled: true,
-          fillColor: Color(0xFF16213E),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12.0)),
-            borderSide: BorderSide.none,
-          ),
-          hintStyle: TextStyle(color: Colors.white54),
-        ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => DuelProvider()),
+      ],
+      // O MaterialApp.router agora é construído diretamente.
+      // O GoRouter, configurado separadamente, irá ler o estado do AuthProvider
+      // a partir do context quando precisar.
+      child: MaterialApp.router(
+        title: 'Duelo Metabólico',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.darkTheme,
+        routerConfig: AppRouter.router, // Usando a configuração estática do router
       ),
-      home: const LoginScreen(),
     );
   }
 }

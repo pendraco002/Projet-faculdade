@@ -1,0 +1,2 @@
+import 'package:firebase_auth/firebase_auth.dart';import 'package:flutter/foundation.dart';
+class AuthService {final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();User? get currentUser => _firebaseAuth.currentUser;Future<UserCredential?> signInAnonymously(String nickname) async {try {return await _firebaseAuth.signInAnonymously();} on FirebaseAuthException catch (e) {debugPrint("Erro no login anônimo: $e");return null;}}Future<void> signOut() async {await _firebaseAuth.signOut();}}
